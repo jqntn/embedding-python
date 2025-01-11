@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <filesystem>
+#include <format>
 #include <string>
 
 #define PY_SSIZE_T_CLEAN
@@ -9,10 +10,17 @@
 
 static errno_t e = 0;
 
+std::filesystem::path g_app_path;
+
 static void
 start_python()
 {
   Py_Initialize();
+
+  PyRun_SimpleString(
+    std::format("import sys\nsys.path.append('{}')",
+                (g_app_path / "site-packages/").generic_string())
+      .c_str());
 }
 
 static void
@@ -53,10 +61,13 @@ main(int argc, char** argv)
   std::string script_name = "hello.py";
 
   std::filesystem::path exe_path = argv[0];
-  std::filesystem::path script_path = exe_path.parent_path() / script_name;
+  g_app_path = exe_path.parent_path();
+  std::filesystem::path script_path = g_app_path / script_name;
 
   start_python();
-  run_python_script(script_path);
+  // run_python_script(script_path);
+  // run_python_script(R"(C:\Users\jqntn\embedding-python\hello-bpy.py)");
+  run_python_script(R"(C:\Users\jqntn\embedding-python\hello-numpy.py)");
   stop_python();
 
   return EXIT_SUCCESS;

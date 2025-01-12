@@ -75,17 +75,16 @@
     <LibraryPath>vcpkg_installed\x64-windows\x64-windows\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ExternalIncludePath>vcpkg_installed\x64-windows-static\x64-windows-static\include\python3.11;$(ExternalIncludePath)</ExternalIncludePath>
-    <LibraryPath>vcpkg_installed\x64-windows-static\x64-windows-static\lib;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>vcpkg_installed\x64-windows\x64-windows\include\python3.11;$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>vcpkg_installed\x64-windows\x64-windows\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
     <VcpkgEnableManifest>true</VcpkgEnableManifest>
   </PropertyGroup>
-  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
-  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <VcpkgUseStatic>true</VcpkgUseStatic>
-    <VcpkgUseMD>false</VcpkgUseMD>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <VcpkgConfiguration>Release</VcpkgConfiguration>
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -139,7 +138,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -151,7 +149,7 @@
     </Link>
     <PostBuildEvent />
     <PostBuildEvent>
-      <Command>if not exist "$(OutDir)\Lib" xcopy /s /i "vcpkg_installed\x64-windows-static\x64-windows-static\tools\python3\Lib" "$(OutDir)\Lib"</Command>
+      <Command>if not exist "$(OutDir)\Lib" xcopy /s /i "vcpkg_installed\x64-windows\x64-windows\tools\python3\Lib" "$(OutDir)\Lib"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -11,7 +11,14 @@ main()
   py::scoped_interpreter guard;
 
   try {
-    py::module_ numpy = py::module_::import("numpy");
+    py::exec(R"(
+      import numpy as np
+      print(np.arange(15).reshape(3, 5))
+    )");
+    py::exec(R"(
+      import bpy
+      bpy.ops.object.select_all(action="DESELECT")
+    )");
   } catch (const std::exception& e) {
     std::cout << e.what();
     throw;

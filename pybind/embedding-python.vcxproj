@@ -128,7 +128,7 @@
     <PostBuildEvent />
     <PostBuildEvent>
       <Command>if not exist "$(OutDir)DLLs" xcopy /s /i "vcpkg_installed\x64-windows\x64-windows\tools\python3\DLLs" "$(OutDir)DLLs"
-if not exist "$(OutDir)python311.zip" cd "$(OutDir)" &amp;&amp; curl -LO "https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-amd64.zip" &amp;&amp; tar -xf "python-3.11.8-embed-amd64.zip" "python311.zip" &amp;&amp; del "python-3.11.8-embed-amd64.zip"</Command>
+if not exist "$(OutDir)python311.zip" cd "$(OutDir)" &amp;&amp; curl -LO "https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-amd64.zip" &amp;&amp; tar -xf "python-3.11.8-embed-amd64.zip" "python311.zip" "LICENSE.txt" &amp;&amp; del "python-3.11.8-embed-amd64.zip"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -151,7 +151,7 @@ if not exist "$(OutDir)python311.zip" cd "$(OutDir)" &amp;&amp; curl -LO "https:
     <PostBuildEvent />
     <PostBuildEvent>
       <Command>if not exist "$(OutDir)DLLs" xcopy /s /i "vcpkg_installed\x64-windows\x64-windows\tools\python3\DLLs" "$(OutDir)DLLs"
-if not exist "$(OutDir)python311.zip" cd "$(OutDir)" &amp;&amp; curl -LO "https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-amd64.zip" &amp;&amp; tar -xf "python-3.11.8-embed-amd64.zip" "python311.zip" &amp;&amp; del "python-3.11.8-embed-amd64.zip"</Command>
+if not exist "$(OutDir)python311.zip" cd "$(OutDir)" &amp;&amp; curl -LO "https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-amd64.zip" &amp;&amp; tar -xf "python-3.11.8-embed-amd64.zip" "python311.zip" "LICENSE.txt" &amp;&amp; del "python-3.11.8-embed-amd64.zip"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -164,6 +164,9 @@ if not exist "$(OutDir)python311.zip" cd "$(OutDir)" &amp;&amp; curl -LO "https:
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="requirements.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="vcpkg.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
